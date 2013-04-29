@@ -6,7 +6,7 @@ exe rundemo :
     ../../src//mapnik
     ../..//thread
     ../..//icu
-    ../..//cairo
+    #../..//cairo
     :
     ;
     

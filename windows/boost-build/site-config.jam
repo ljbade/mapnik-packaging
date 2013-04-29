@@ -14,13 +14,13 @@ local MAPNIK_DEPS_DIR = [ modules.peek : MAPNIK_DEPS_DIR ] ;
 
 lib z : : <name>zlib <search>$(MAPNIK_DEPS_DIR)/zlib ;
 lib png : z : <name>libpng <search>$(MAPNIK_DEPS_DIR)/libpng ;
-lib jpeg : : <name>libjpeg <search>$(MAPNIK_DEPS_DIR)/jpeg ;
+lib jpeg : : <name>jpeg <search>$(MAPNIK_DEPS_DIR)/jpeg ;
 lib tiff : : <name>libtiff <search>$(MAPNIK_DEPS_DIR)/tiff/libtiff ;
-lib icu : : <name>icuuc <search>$(MAPNIK_DEPS_DIR)/icu/lib ;
-lib icui18n : : <name>icuin <search>$(MAPNIK_DEPS_DIR)/icu/lib ;
-lib icudata : : <name>icudt <search>$(MAPNIK_DEPS_DIR)/icu/lib ;
+lib icu : : <name>icuuc <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;
+lib icui18n : : <name>icuin <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;
+lib icudata : : <name>icudt <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;
 lib xml2 : : <name>libxml2 <search>$(MAPNIK_DEPS_DIR)/libxml2/win32/bin.msvc ;
-lib freetype2 : : <name>freetype <search>$(MAPNIK_DEPS_DIR)/freetype ;
+lib freetype2 : : <name>freetype2411MT <search>$(MAPNIK_DEPS_DIR)/freetype ;
 lib proj : : <name>proj <search>$(MAPNIK_DEPS_DIR)/proj/src ;
 lib pq : : <name>libpq <search>$(MAPNIK_DEPS_DIR)/postgresql/src/interfaces/libpq/Release  ;
 
@@ -41,18 +41,21 @@ lib odbccp : : <name>odbccp32 <search>"c:/Program Files/MicrosoftSDKs/Windows/v7
 lib user : : <name>user32 <search>"c:/Program Files/MicrosoftSDKs/Windows/v7.0A/Lib" ;
 
 # boost libs
-lib thread : : <variant>release <name>libboost_thread-vc100-mt-1_49 <search>$(BOOST_LIBS) ;
-lib thread : : <variant>debug <name>libboost_thread-vc100-mt-gd-1_49 <search>$(BOOST_LIBS) ;
+lib thread : : <variant>release <name>libboost_thread-vc110-mt-1_53 <search>$(BOOST_LIBS) ;
+lib thread : : <variant>debug <name>libboost_thread-vc110-mt-gd-1_53 <search>$(BOOST_LIBS) ;
 
-lib filesystem : : <variant>release <name>libboost_filesystem-vc100-mt-1_49 <search>$(BOOST_LIBS) ;
-lib filesystem : : <variant>debug <name>libboost_filesystem-vc100-mt-gd-1_49 <search>$(BOOST_LIBS) ;
+lib filesystem : : <variant>release <name>libboost_filesystem-vc110-mt-1_53 <search>$(BOOST_LIBS) ;
+lib filesystem : : <variant>debug <name>libboost_filesystem-vc110-mt-gd-1_53 <search>$(BOOST_LIBS) ;
 
-lib regex : : <variant>release <name>libboost_regex-vc100-mt-1_49 <search>$(BOOST_LIBS) ;
-lib regex : : <variant>debug  <name>libboost_regex-vc100-mt-gd-1_49 <search>$(BOOST_LIBS) ;
+lib system : : <variant>release <name>libboost_system-vc110-mt-1_53 <search>$(BOOST_LIBS) ;
+lib system : : <variant>debug <name>libboost_system-vc110-mt-gd-1_53 <search>$(BOOST_LIBS) ;
 
-lib program_options : : <variant>release <name>libboost_program_options-vc100-mt-1_49 <search>$(BOOST_LIBS) ;
-lib program_options : : <variant>debug <name>libboost_program_options-vc100-mt-gd-1_49 <search>$(BOOST_LIBS) ;
+lib regex : : <variant>release <name>libboost_regex-vc110-mt-1_53 <search>$(BOOST_LIBS) ;
+lib regex : : <variant>debug  <name>libboost_regex-vc110-mt-gd-1_53 <search>$(BOOST_LIBS) ;
 
-lib python : : <variant>release <name>boost_python-vc100-mt-1_49 <search>$(BOOST_LIBS) ;
-lib python : : <variant>debug <name>boost_python-vc100-mt-gd-1_49 <search>$(BOOST_LIBS) ;
+lib program_options : : <variant>release <name>libboost_program_options-vc110-mt-1_53 <search>$(BOOST_LIBS) ;
+lib program_options : : <variant>debug <name>libboost_program_options-vc110-mt-gd-1_53 <search>$(BOOST_LIBS) ;
+
+lib python : : <variant>release <name>boost_python-vc110-mt-1_53 <search>$(BOOST_LIBS) ;
+lib python : : <variant>debug <name>boost_python-vc110-mt-gd-1_53 <search>$(BOOST_LIBS) ;
 

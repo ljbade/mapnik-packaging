@@ -3,9 +3,9 @@ project : source-location  $(MAPNIK_SOURCE)/src ;
     
 lib mapnik
     :
-	request.cpp
+    request.cpp
     well_known_srs.cpp
-	params.cpp
+    params.cpp
     image_filter_types.cpp
     miniz_png.cpp
     color.cpp
@@ -54,7 +54,7 @@ lib mapnik
     save_map.cpp
     shield_symbolizer.cpp
     text_symbolizer.cpp
-    tiff_reader.cpp
+    #tiff_reader.cpp
     wkb.cpp
     projection.cpp
     proj_transform.cpp
@@ -103,14 +103,14 @@ lib mapnik
     # others
     feature_style_processor.cpp
     mapped_memory_cache.cpp
-    jpeg_reader.cpp
+    #jpeg_reader.cpp
     libxml2_loader.cpp
     #rapidxml_loader.cpp
     load_map.cpp
     
     # cairo
-    cairo_renderer.cpp
-	cairo_context.cpp
+    #cairo_renderer.cpp
+    #cairo_context.cpp
   
     # agg
     agg/process_building_symbolizer.cpp
@@ -141,26 +141,27 @@ lib mapnik
     #wkt
     wkt/wkt_factory.cpp
     ..//deps//agg//agg
-	..//deps//clipper//clipper
+    ..//deps//clipper//clipper
     ..//thread
+    ..//system
     ..//filesystem
     ..//regex
     ..//z
     ..//png
-    ..//jpeg
-    ..//tiff
+    #..//jpeg
+    #..//tiff
     ..//freetype2
     ..//proj
     ..//icu
-	..//icui18n
+    ..//icui18n
     ..//xml2
-    ..//cairo
-      :
-        <define>HAVE_XML2
-        #<define>MAPNIK_STATS
-        <define>MAPNIK_EXPORTS
-        <link>shared
-        <linkflags>/VERBOSE:LIB
-        <linkflags>/NODEFAULTLIB:libcmt.lib
-        <variant>debug:<linkflags>/NODEFAULTLIB:msvcrt.lib
+    #..//cairo
+    :
+    <define>HAVE_XML2
+    #<define>MAPNIK_STATS
+    <define>MAPNIK_EXPORTS
+    <link>shared
+    <linkflags>/VERBOSE:LIB
+    <linkflags>/NODEFAULTLIB:libcmt.lib
+    <variant>debug:<linkflags>/NODEFAULTLIB:msvcrt.lib
     ;

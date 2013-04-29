@@ -25,8 +25,8 @@ rule install ( name : source_dir : requirements * : binaries * : libraries * : h
         
     $(install-dir) ?= /usr/local ;
     install-dir = $(install-dir:G=) ;
-    requirements = [ property.change $(requirements) : <install-dir> ] ;
-    
+    requirements = [ property.change $(requirements) : <install-dir> ] ;    
+    echo $(headers) ;
     # headers
     stage.install $(name)-headers 
         : $(headers)

@@ -9,7 +9,7 @@ Hopefully, this will allow fully automated builds in the future.
 
 ## Prerequisites
 
-* Visual C++ 2008 or 2010 Express
+* Visual C++ 2008 or 2010 or 2012 Express
   * http://www.microsoft.com/visualstudio/en-us/products/2008-editions/visual-basic-express
   * http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-basic-express
 * GNU Unix tools (GnuWin32) 
@@ -37,23 +37,23 @@ The order in %PATH% variable is important (Git / Cygwin / GnuWin32 )
 
 ### Packages versions:
 
-    set ICU_VERSION=4.8
-    set BOOST_VERSION=49
-    set ZLIB_VERSION=1.2.5
-    set LIBPNG_VERSION=1.5.10
-    set JPEG_VERSION=8d
-    set FREETYPE_VERSION=2.4.9
-    set POSTGRESQL_VERSION=9.1.3
-    set TIFF_VERSION=4.0.0beta7
+    set ICU_VERSION=5.1
+    set BOOST_VERSION=53
+    set ZLIB_VERSION=1.2.7
+    set LIBPNG_VERSION=1.6.2
+    set JPEG_VERSION=9
+    set FREETYPE_VERSION=2.4.11
+    set POSTGRESQL_VERSION=9.2.4
+    set TIFF_VERSION=4.0.3
     set PROJ_VERSION=4.8.0
     set PROJ_GRIDS_VERSION=1.5
-    set GDAL_VERSION=1.9.0
-    set LIBXML2_VERSION=2.7.8
-    set PIXMAN_VERSION=0.22.2
-    set CAIRO_VERSION=1.10.2
-    set SQLITE_VERSION=3071100
+    set GDAL_VERSION=1.9.2
+    set LIBXML2_VERSION=2.9.1
+    set PIXMAN_VERSION=0.28.2
+    set CAIRO_VERSION=1.12.14
+    set SQLITE_VERSION=3071602
     set EXPAT_VERSION=2.1.0
-    set GEOS_VERSION=3.3.3
+    set GEOS_VERSION=3.3.8
     
 ## Download
 
@@ -65,16 +65,16 @@ The order in %PATH% variable is important (Git / Cygwin / GnuWin32 )
     curl http://www.ijg.org/files/jpegsr%JPEG_VERSION%.zip -O
     curl http://ftp.igh.cnrs.fr/pub/nongnu/freetype/freetype-%FREETYPE_VERSION%.tar.gz -O
     curl http://ftp.de.postgresql.org/packages/databases/PostgreSQL/latest/postgresql-%POSTGRESQL_VERSION%.tar.gz -O
-    curl ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-%LIBPNG_VERSION%.tar.gz -O
+    curl ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-%LIBPNG_VERSION%.tar.gz -O
     curl http://www.zlib.net/zlib-%ZLIB_VERSION%.tar.gz -O
     curl http://download.osgeo.org/libtiff/tiff-%TIFF_VERSION%.tar.gz -O
     curl http://www.cairographics.org/releases/pixman-%PIXMAN_VERSION%.tar.gz -O
-    curl http://www.cairographics.org/releases/cairo-%CAIRO_VERSION%.tar.gz -O
+    curl http://www.cairographics.org/releases/cairo-%CAIRO_VERSION%.tar.xz -O
     curl http://download.icu-project.org/files/icu4c/4.8.1.1/icu4c-4_8_1_1-src.tgz -O
     curl ftp://xmlsoft.org/libxml2/libxml2-%LIBXML2_VERSION%.tar.gz -O
     curl http://iweb.dl.sourceforge.net/project/expat/expat_win32/%EXPAT_VERSION%/expat-win32bin-%EXPAT_VERSION%.exe -O
     curl http://download.osgeo.org/gdal/gdal-%GDAL_VERSION%.tar.gz -O
-    curl http://www.sqlite.org/sqlite-amalgamation-%SQLITE_VERSION%.zip -O
+    curl http://www.sqlite.org/2013/sqlite-amalgamation-%SQLITE_VERSION%.zip -O
     curl http://download.osgeo.org/proj/proj-%PROJ_VERSION%.tar.gz -O
     curl http://download.osgeo.org/proj/proj-datumgrid-%PROJ_GRIDS_VERSION%.zip -O
     curl http://download.osgeo.org/geos/geos-%GEOS_VERSION%.tar.bz2 -O
@@ -102,15 +102,21 @@ for every build variant.*
     cd icu/
     msbuild source\allinone\allinone.sln /t:Rebuild  /p:Configuration="Release" /p:Platform=Win32
 
-    cd %ROOTDIR%
+##### VC++ 2012
+
+    rem Update project to vc++ 2012
+    cd icu/
+    msbuild source\allinone\allinone.sln /t:Rebuild  /p:Configuration="Release" /p:Platform=x64
+
+cd %ROOTDIR%
 
 ### boost
 
     bsdtar xzf %PKGDIR%/boost_1_%BOOST_VERSION%_0.tar.gz
     cd boost_1_%BOOST_VERSION%_0
-    set BOOST_PREFIX=boost-%BOOST_VERSION%-vc100
+    set BOOST_PREFIX=boost-%BOOST_VERSION%-vc110
     bootstrap.bat
-    bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-thread --with-filesystem --with-date_time --with-system --with-program_options --with-regex --with-chrono --disable-filesystem2 -sHAVE_ICU=1 -sICU_PATH=%ROOTDIR%\\icu -sICU_LINK=%ROOTDIR%\\icu\\lib\\icuuc.lib release link=static install --build-type=complete
+    bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-thread --with-filesystem --with-date_time --with-system --with-program_options --with-regex --with-chrono --disable-filesystem2 -sHAVE_ICU=1 -sICU_PATH=%ROOTDIR%\\icu -sICU_LINK=%ROOTDIR%\\icu\\lib64\\icuuc.lib release link=static install --build-type=complete address-model=64
 
     # if you need python
     bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-python python=2.7 release link=static --build-type=complete install
@@ -120,8 +126,14 @@ for every build variant.*
     unzip %PKGDIR%\jpegsr%JPEG_VERSION%.zip
     rename jpeg-%JPEG_VERSION% jpeg
     cd jpeg 
-    copy jconfig.txt jconfig.h
-    nmake /f Makefile.vc nodebug=1
+    //copy jconfig.txt jconfig.h
+    //nmake /f Makefile.vc nodebug=1
+
+// FIXME
+    nmake /f makefile.vc setup-v10
+    // open in vc++ 2012 and upgrade solution to vc110
+    msbuild jpeg.vcxproj /t:Rebuild  /p:Configuration="Release" /p:Platform=x64
+
     cd %ROOTDIR%
 
 ### Freetype 
@@ -141,6 +153,12 @@ for every build variant.*
     move objs\win32\vc2010\freetype249.lib freetype.lib
     cd %ROOTDIR%
 
+##### VC++ 2012
+    // manually upgrade from x64 / Release Multithreaded
+    open in vc++2012 : builds\win32\vc2010\freetype.sln
+    ...
+    save all on exit!!
+    msbuild builds\win32\vc2010\freetype.sln /p:Configuration="Release Multithreaded" /p:Platform=x64 /t:Rebuild
 
 ### zlib
 
@@ -163,10 +181,17 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
 ##### VC++ 2010
 
     vcupgrade zlib.vcproj
-    msbuild zlib.vcxproj /t:Rebuild /p:Configuration="LIB Release" /p:Platform=Win32
+    msbuild zlib.vcxproj /t:Rebuild /p:Configuration="LIB Release" /p:Platform=x64
 
     cd %ROOTDIR%\zlib
     move projects\visualc71\Win32_LIB_Release\ZLib\zlib.lib zlib.lib
+    cd  %ROOTDIR%
+
+#### VC++ 2012
+    vcupgrade zlib.vcproj
+    msbuild zlib.vcxproj /t:Rebuild /p:Configuration="LIB Release" /p:Platform=x64
+    cd %ROOTDIR%\zlib
+    move "projects\visualc\x64\LIB Release\zlib.lib" zlib.lib
     cd  %ROOTDIR%
 
 ### libpng
@@ -187,6 +212,9 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     move projects\visualc71\Win32_LIB_Release\libpng.lib libpng.lib
     cd %ROOTDIR%
 
+##### VC++ 2012
+   msbuild libpng.vcxproj /t:Rebuild  /p:Configuration="LIB Release" /p:Platform=x64
+   move "projects\visualc71\x64\LIB Release\libpng.lib" libpng.lib
    
 ### libpq (PostgreSQL C-interface)
 
@@ -213,7 +241,7 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     set PATTERN="%P1%%P2%%P3%%P4%%P5%%P6%%P7%%P8%"
     sed %PATTERN%  nmake.opt > nmake.opt.fixed
     move /Y nmake.opt.fixed nmake.opt
-    nmake /f Makefile.vc
+    nmake /f Makefile.vc`w
     cd %ROOTDIR%
 
 ### Pixman
@@ -261,7 +289,7 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     bsdtar xfz %PKGDIR%\proj-%PROJ_VERSION%.tar.gz
     rename proj-%PROJ_VERSION% proj
     cd proj/nad
-    unzip -o ../../proj-datumgrid-%PROJ_GRIDS_VERSION%.zip
+    unzip -o ../../packages/proj-datumgrid-%PROJ_GRIDS_VERSION%.zip
     cd ..\
     nmake /f Makefile.vc
     cd %ROOTDIR%
@@ -286,9 +314,14 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
 
 ##### VC++ 2010
 
-    nmake /f makefile.vc MSVC_VER=1600
+    nmake /f makefile.vc MSVC_VER=1600`w
  
-    cd %ROOTDIR%
+##### VC++ 2012
+
+    nmake /f makefile.vc MSVC_VER=1700
+
+
+cd %ROOTDIR%
 
 
 ### sqlite 

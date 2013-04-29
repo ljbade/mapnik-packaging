@@ -50,7 +50,9 @@
 # -------------------
 
 # Configure msvc (default version, searched for in standard locations and PATH).
-using msvc ;
+###using msvc ;
+
+using msvc : : "C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\x86_amd64\cl.exe" ;
 
 # Configure specific msvc version (searched for in standard locations and PATH).
 
