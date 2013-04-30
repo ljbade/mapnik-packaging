@@ -22,12 +22,12 @@ lib icudata : : <name>icudt <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;
 lib xml2 : : <name>libxml2 <search>$(MAPNIK_DEPS_DIR)/libxml2/win32/bin.msvc ;
 lib freetype2 : : <name>freetype2411MT <search>$(MAPNIK_DEPS_DIR)/freetype ;
 lib proj : : <name>proj <search>$(MAPNIK_DEPS_DIR)/proj/src ;
-lib pq : : <name>libpq <search>$(MAPNIK_DEPS_DIR)/postgresql/src/interfaces/libpq/Release  ;
+lib pq : : <name>libpq <search>$(MAPNIK_DEPS_DIR)/postgresql  ;
 
 # Cairo
 lib cairo : : <name>cairo <search>$(MAPNIK_DEPS_DIR)/cairo/src/release ;
 
-lib expat : : <name>libexpat <search>"C:/Program Files (x86)/Expat 2.1.0/bin" ;
+lib expat : : <name>libexpat <search>$(MAPNIK_DEPS_DIR)/expat ;
 lib gdal : : <name>gdal <search>$(MAPNIK_DEPS_DIR)/gdal ;
 
 # win32 libs

@@ -64,7 +64,7 @@ The order in %PATH% variable is important (Git / Cygwin / GnuWin32 )
     curl http://iweb.dl.sourceforge.net/project/boost/boost/1.%BOOST_VERSION%.0/boost_1_%BOOST_VERSION%_0.tar.gz -O
     curl http://www.ijg.org/files/jpegsr%JPEG_VERSION%.zip -O
     curl http://ftp.igh.cnrs.fr/pub/nongnu/freetype/freetype-%FREETYPE_VERSION%.tar.gz -O
-    curl http://ftp.de.postgresql.org/packages/databases/PostgreSQL/latest/postgresql-%POSTGRESQL_VERSION%.tar.gz -O
+    curl http://ftp.postgresql.org/pub/source/v%POSTGRESQL_VERSION%/postgresql-%POSTGRESQL_VERSION%.tar.gz -O
     curl ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-%LIBPNG_VERSION%.tar.gz -O
     curl http://www.zlib.net/zlib-%ZLIB_VERSION%.tar.gz -O
     curl http://download.osgeo.org/libtiff/tiff-%TIFF_VERSION%.tar.gz -O
@@ -116,26 +116,35 @@ cd %ROOTDIR%
     cd boost_1_%BOOST_VERSION%_0
     set BOOST_PREFIX=boost-%BOOST_VERSION%-vc110
     bootstrap.bat
-    bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-thread --with-filesystem --with-date_time --with-system --with-program_options --with-regex --with-chrono --disable-filesystem2 -sHAVE_ICU=1 -sICU_PATH=%ROOTDIR%\\icu -sICU_LINK=%ROOTDIR%\\icu\\lib64\\icuuc.lib release link=static install --build-type=complete address-model=64
+    bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-thread --with-filesystem --with-date_time --with-system --with-program_options --with-regex --with-chrono --disable-filesystem2 -sHAVE_ICU=1 -sICU_PATH=%ROOTDIR%\\icu -sICU_LINK=%ROOTDIR%\\icu\\lib64\\icuuc.lib release link=static --build-type=complete address-model=64 install
 
     # if you need python
     bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-python python=2.7 release link=static --build-type=complete install
 
 ### Jpeg
-
     unzip %PKGDIR%\jpegsr%JPEG_VERSION%.zip
     rename jpeg-%JPEG_VERSION% jpeg
     cd jpeg 
     //copy jconfig.txt jconfig.h
     //nmake /f Makefile.vc nodebug=1
 
-// FIXME
-    nmake /f makefile.vc setup-v10
+##### VC++ 2012 
+    unzip %PKGDIR%\jpegsr%JPEG_VERSION%.zip
+    rename jpeg-%JPEG_VERSION% jpeg
+    cd jpeg 
+    // Microsoft dropped support for command line tools
+    // and there is no win32.mak in VC++ 2012 install :) 
+    //  1. Download Windows SDKs (7.0a) 
+    //  2. Locate and copy win32.mak into %ROOTDIR%/jpeg e.g
+    //  copy "c:\Program Files\Microsoft SDKs\Windows\v7.1\Include\Win32.Mak" .
+    //  3. Create vc++ 2012 (vc100) project files 
+    nmake /f makefile.vc CPU=AMD64 setup-v10 
     // open in vc++ 2012 and upgrade solution to vc110
+    // make sure you save all changes !!
     msbuild jpeg.vcxproj /t:Rebuild  /p:Configuration="Release" /p:Platform=x64
-
+    copy x64\Release\jpeg.lib .
     cd %ROOTDIR%
-
+    
 ### Freetype 
 
     bsdtar xfz "%PKGDIR%\freetype-%FREETYPE_VERSION%.tar.gz"
@@ -224,6 +233,11 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     nmake /f win32.mak
     cd %ROOTDIR%
 
+##### VC++ 2012
+    nmake /f win32.mak CPU=AMD64
+    cd %ROOTDIR%
+    move src\interfaces\libpq\Release\libpq.lib .
+
 
 ### Tiff
 
@@ -241,8 +255,10 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     set PATTERN="%P1%%P2%%P3%%P4%%P5%%P6%%P7%%P8%"
     sed %PATTERN%  nmake.opt > nmake.opt.fixed
     move /Y nmake.opt.fixed nmake.opt
-    nmake /f Makefile.vc`w
+    nmake /f Makefile.vc
     cd %ROOTDIR%
+    copy libtiff\libtiff.lib .
+
 
 ### Pixman
     
@@ -295,9 +311,13 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     cd %ROOTDIR%
 
 ### Expat (for GDAL's KML,GPX, GeoRSS read support)
-
-    @rem - run the binary installer
-    start expat-win32bin-%EXPAT_VERSION%.exe
+  
+    Download source untar as usual, untar and rename dir to 'expat'
+    open vc++ 6 *.dsw project file in vc++ 2012,  upgrade and save changes.
+    (specifically we're interseted in expat_static sub-project, ensure it's linked to correct runtime /MD etc etc)
+    msbuild lib\expat_static.vcxproj  /t:Rebuild  /p:Configuration="Release" /p:Platform=x64
+    copy win32\bin\Release\libexpat.lib .
+    cd %ROOTDIR%
 
 ### GDAL
 
@@ -314,12 +334,11 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
 
 ##### VC++ 2010
 
-    nmake /f makefile.vc MSVC_VER=1600`w
+    nmake /f makefile.vc MSVC_VER=1600
  
 ##### VC++ 2012
-
-    nmake /f makefile.vc MSVC_VER=1700
-
+    uncomment WIN64
+    nmake /f makefile.vc MSVC_VER=1700 WIN64=YES
 
 cd %ROOTDIR%
 

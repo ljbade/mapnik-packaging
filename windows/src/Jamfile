@@ -54,7 +54,7 @@ lib mapnik
     save_map.cpp
     shield_symbolizer.cpp
     text_symbolizer.cpp
-    #tiff_reader.cpp
+    tiff_reader.cpp
     wkb.cpp
     projection.cpp
     proj_transform.cpp
@@ -103,7 +103,7 @@ lib mapnik
     # others
     feature_style_processor.cpp
     mapped_memory_cache.cpp
-    #jpeg_reader.cpp
+    jpeg_reader.cpp
     libxml2_loader.cpp
     #rapidxml_loader.cpp
     load_map.cpp
@@ -148,8 +148,8 @@ lib mapnik
     ..//regex
     ..//z
     ..//png
-    #..//jpeg
-    #..//tiff
+    ..//jpeg
+    ..//tiff
     ..//freetype2
     ..//proj
     ..//icu

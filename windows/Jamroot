@@ -41,9 +41,9 @@ project mapnik
     <define>MAPNIK_THREADSAFE
     <define>BIGINT
     <define>HAVE_LIBXML2
-#   <define>HAVE_JPEG
+    <define>HAVE_JPEG
     <define>HAVE_PNG
-#   <define>HAVE_TIFF
+    <define>HAVE_TIFF
     <define>MAPNIK_USE_PROJ4
     <define>BOOST_REGEX_HAS_ICU
 #   <define>HAVE_CAIRO
@@ -89,7 +89,7 @@ alias advapi : /site-config//advapi : <link>static ;
 alias shfolder : /site-config//shfolder : <link>static ;
 alias secur : /site-config//secur : <link>static ;
 alias xml2 : /site-config//xml2 : <link>shared ;
-alias expat : /site-config//expat : <link>shared ;
+alias expat : /site-config//expat : <link>static ;
 alias gdal : /site-config//gdal : <link>shared ;
 alias odbc : /site-config//odbc : <link>static ;
 alias odbccp : /site-config//odbccp : <link>static ;
