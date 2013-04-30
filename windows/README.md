@@ -7,7 +7,7 @@ To test address-model of a static library:
 
 dumpbin /headers | head -20 
 
-and look for ```bash 8664 machine```
+and look for ```8664 machine (x64)```
 
 e.g 
 
