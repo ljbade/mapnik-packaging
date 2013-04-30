@@ -11,6 +11,7 @@ and look for ```8664 machine (x64)```
 
 e.g 
 
+```bash
 c:\mapnik_build\mapnik-packaging>dumpbin /headers c:\mapnik-win64\lib\mapnik\input\shape.input | head -20
 Microsoft (R) COFF/PE Dumper Version 11.00.50727.1
 Copyright (C) Microsoft Corporation.  All rights reserved.
@@ -32,7 +33,7 @@ FILE HEADER VALUES
                    Executable
                    Application can handle large (>2GB) addresses
 
-
+```
 
 These are working notes on building Mapnik 2.x on windows.
 
