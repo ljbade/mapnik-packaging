@@ -3,9 +3,11 @@
 
 *TIP* 
 
-To test address-model of the static library:
+To test address-model of a static library:
 
 dumpbin /headers | head -20 
+
+and look for ```bash 8664 machine```
 
 e.g 
 
