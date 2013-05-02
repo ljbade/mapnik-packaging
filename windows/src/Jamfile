@@ -109,8 +109,8 @@ lib mapnik
     load_map.cpp
     
     # cairo
-    #cairo_renderer.cpp
-    #cairo_context.cpp
+    cairo_renderer.cpp
+    cairo_context.cpp
   
     # agg
     agg/process_building_symbolizer.cpp
@@ -155,7 +155,7 @@ lib mapnik
     ..//icu
     ..//icui18n
     ..//xml2
-    #..//cairo
+    ..//cairo
     :
     <define>HAVE_XML2
     #<define>MAPNIK_STATS

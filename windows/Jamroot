@@ -46,7 +46,7 @@ project mapnik
     <define>HAVE_TIFF
     <define>MAPNIK_USE_PROJ4
     <define>BOOST_REGEX_HAS_ICU
-#   <define>HAVE_CAIRO
+    <define>HAVE_CAIRO
     <cxxflags>/wd4345
     <cxxflags>/wd4661	
     <cxxflags>/wd4018
@@ -169,10 +169,12 @@ install demo : demo/c++//rundemo :
 #  python extensions
 local python = [ option.get python : "" ] ;
 
+echo "PYTHON-> $(python)" ;
+
 if $(python) 
 {
     build-project bindings/python ;
-    local python-root =  "c:/Python27-32" ;  #[ python.root ] ;
+    local python-root =  "c:/Python27" ;  #[ python.root ] ;
     local python-version = "2.7" ; #[ python.python-version $(python-root)/bin/python ] ;
     local python_bindings_dir = $(prefix)/python/$(python-version)/site-packages/mapnik ;
     echo "Will install Python bindings into " $(python_bindings_dir) ;

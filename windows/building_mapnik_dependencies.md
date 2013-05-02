@@ -119,7 +119,10 @@ cd %ROOTDIR%
     bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-thread --with-filesystem --with-date_time --with-system --with-program_options --with-regex --with-chrono --disable-filesystem2 -sHAVE_ICU=1 -sICU_PATH=%ROOTDIR%\\icu -sICU_LINK=%ROOTDIR%\\icu\\lib64\\icuuc.lib release link=static --build-type=complete address-model=64 install
 
     # if you need python
-    bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-python python=2.7 release link=static --build-type=complete install
+    # edit user-config.jam ->  
+    # python : c: TODO!!!!!!!!
+        
+    bjam toolset=msvc --prefix=..\\%BOOST_PREFIX% --with-python --python=2.7 release link=shared --build-type=complete address-model=64 install
 
 ### Jpeg
     unzip %PKGDIR%\jpegsr%JPEG_VERSION%.zip
@@ -266,6 +269,8 @@ zlib comes with old VC++ project files. Instead we use upgraded project file fro
     rename pixman-%PIXMAN_VERSION% pixman
     cd pixman\pixman
     make -f Makefile.win32 "CFG=release"
+##### VC++ 2012
+    make -f Makefile.win32 CFG=release MMX=off SSE2=on
     cd %ROOTDIR%
     
 ### Cairo

@@ -20,8 +20,6 @@ set PATH=%ROOTDIR%\boost_1_%BOOST_VERSION%_0;%PATH%
 @rem xcopy /i /s %MAPNIK_SOURCE%\deps\agg\include %PREFIX%\include\mapnik\agg /Y
 
 @rem copy all libs of dependencies
-@rem expat, needed by ogr plugin
-@rem copy "C:\Program Files (x86)\Expat 2.1.0\Bin\libexpat.dll" %PREFIX%\lib\
 @rem the rest, needed by libmapnik
 @rem copy %ROOTDIR%\cairo\src\release\cairo.dll %PREFIX%\lib\
 copy %ROOTDIR%\icu\bin64\icuuc51.dll %PREFIX%\lib\
@@ -30,7 +28,7 @@ copy %ROOTDIR%\icu\bin64\icuin51.dll %PREFIX%\lib\
 copy %ROOTDIR%\libxml2\win32\bin.msvc\libxml2.dll %PREFIX%\lib\
 copy %ROOTDIR%\proj\src\proj.dll %PREFIX%\lib\
 
-bjam toolset=msvc -j4 --prefix=%PREFIX% -sBOOST_INCLUDES=%BOOST_INCLUDES% -sBOOST_LIBS=%BOOST_LIBS% -sMAPNIK_DEPS_DIR=%MAPNIK_DEPS_DIR% -sMAPNIK_SOURCE=%MAPNIK_SOURCE% address-model=64
+bjam toolset=msvc -j4 --prefix=%PREFIX% -sBOOST_INCLUDES=%BOOST_INCLUDES% -sBOOST_LIBS=%BOOST_LIBS% -sMAPNIK_DEPS_DIR=%MAPNIK_DEPS_DIR% -sMAPNIK_SOURCE=%MAPNIK_SOURCE% address-model=64 --python=2.7
 
 @rem python - paths.py, printing.py, __init__.py, boost python dll
 echo Started at %STARTTIME%, finished at %TIME%

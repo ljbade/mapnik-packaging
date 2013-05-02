@@ -1,6 +1,6 @@
 ###
 MAPNIK_SOURCE = [ modules.peek : MAPNIK_SOURCE ] ;
-PYTHON_ROOT = "C:/Python27-32" ;
+PYTHON_ROOT = "C:\\Python27" ;
 project : source-location $(MAPNIK_SOURCE)/bindings/python
 	: requirements <library>../..//python ;
 

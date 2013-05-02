@@ -87,4 +87,4 @@ using msvc : : "C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CT
 # Configure with an explicit installation prefix.
 # using qt : /usr/opt/qt ;
 
-using python : 2.7 : C:/Python27/python.exe ;
+using python : 2.7 : c:\\python27\\python.exe ;
