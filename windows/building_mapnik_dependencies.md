@@ -26,9 +26,9 @@ Hopefully, this will allow fully automated builds in the future.
 
 ## Environment
 
-We'll be using combination of "Visual Studio 2012 Command Prompt" and  GNU tools.
+We'll be using combination of "Visual Studio 2012 Command Prompt" with latest MSVC++ compiler  and  GNU tools.
 Please, ensure PATH is setup correctly and GNU tools can be accessed from VC++ command prompt.
-The order in %PATH% variable is important (Git / GnuWin32 )
+The order in %PATH% variable is important.
 
 	set PATH=%PATH%;c:\msysgit\msysgit\bin;c:\GnuWin32\bin
 	set ROOTDIR=c:\mapnik_build
@@ -36,25 +36,34 @@ The order in %PATH% variable is important (Git / GnuWin32 )
 	mkdir packages
 	set PKGDIR=%ROOTDIR%/packages
 
-### Packages versions:
+Here is a  *.bat file that can be run from "Developer Command Prompt for VS2012" to streamline the process :
 
-	set ICU_VERSION=5.1
-	set BOOST_VERSION=53
-	set ZLIB_VERSION=1.2.7
-	set LIBPNG_VERSION=1.6.2
-	set JPEG_VERSION=9
-	set FREETYPE_VERSION=2.4.11
-	set POSTGRESQL_VERSION=9.2.4
-	set TIFF_VERSION=4.0.3
-	set PROJ_VERSION=4.8.0
-	set PROJ_GRIDS_VERSION=1.5
-	set GDAL_VERSION=1.9.2
-	set LIBXML2_VERSION=2.9.1
-	set PIXMAN_VERSION=0.28.2
-	set CAIRO_VERSION=1.12.14
-	set SQLITE_VERSION=3071602
-	set EXPAT_VERSION=2.1.0
-	set GEOS_VERSION=3.3.8
+     c:\mapnik_build>more mapnik_build.bat
+     call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\vcvarsx86_amd64.bat"
+     set PATH=C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\x86_amd64;%PATH%;c:\Program Files (x86)\Git\bin;c:\Program Files (x86)\GnuWin32\bin
+     set ROOTDIR=C:\mapnik_build
+     set PKGDIR=%ROOTDIR%/packages
+
+     set ICU_VERSION=5.1
+     set BOOST_VERSION=53
+     set ZLIB_VERSION=1.2.7
+     set LIBPNG_VERSION=1.6.2
+     set JPEG_VERSION=9
+     set FREETYPE_VERSION=2.4.11
+     set POSTGRESQL_VERSION=9.2.4
+     set TIFF_VERSION=4.0.3
+     set PROJ_VERSION=4.8.0
+     set PROJ_GRIDS_VERSION=1.5
+     set GDAL_VERSION=1.9.2
+     set LIBXML2_VERSION=2.9.1
+     set PIXMAN_VERSION=0.28.2
+     set CAIRO_VERSION=1.12.14
+     set SQLITE_VERSION=3071602
+     set EXPAT_VERSION=2.1.0
+     set GEOS_VERSION=3.3.8
+
+### Packages versions:
+    see above
 
 ## Download
 
