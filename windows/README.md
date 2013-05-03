@@ -24,7 +24,9 @@ most sane way to get going.
 
 To test address-model of a static library:
 
+``` bash
 dumpbin /headers | head -20
+```
 
 and look for ```8664 machine (x64)```
 
@@ -34,9 +36,9 @@ VS 2012 express is a bit shy about 64-bit builds. To enable :
 
 * BUILD -> Configuration Manager
 
-	-> Platform
+	*-> Platform
 		From drop down list select 'New' and then 'x64' based on 'Win32'.
-	-> Configuration
+	*-> Configuration
 		Release
 
 * PROJECT -> Configuration -> Librarian -> Target Machine : MachineX64 (/MACHINE:x64)
