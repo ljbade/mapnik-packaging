@@ -16,6 +16,7 @@ lib z : : <name>zlib <search>$(MAPNIK_DEPS_DIR)/zlib ;
 lib png : z : <name>libpng <search>$(MAPNIK_DEPS_DIR)/libpng ;
 lib jpeg : : <name>jpeg <search>$(MAPNIK_DEPS_DIR)/jpeg ;
 lib tiff : : <name>libtiff <search>$(MAPNIK_DEPS_DIR)/tiff/libtiff ;
+lib webp : : <name>libwebp <search>$(MAPNIK_DEPS_DIR)/libwebp/output/release-static/x64/lib ;
 lib icu : : <name>icuuc <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;
 lib icui18n : : <name>icuin <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;
 lib icudata : : <name>icudt <search>$(MAPNIK_DEPS_DIR)/icu/lib64 ;

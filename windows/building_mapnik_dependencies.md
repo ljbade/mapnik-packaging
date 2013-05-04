@@ -52,6 +52,7 @@ Here is a  *.bat file that can be run from "Developer Command Prompt for VS2012"
      set FREETYPE_VERSION=2.4.11
      set POSTGRESQL_VERSION=9.2.4
      set TIFF_VERSION=4.0.3
+     set WEBP_VERSION=0.3.0
      set PROJ_VERSION=4.8.0
      set PROJ_GRIDS_VERSION=1.5
      set GDAL_VERSION=1.9.2
@@ -75,6 +76,7 @@ Here is a  *.bat file that can be run from "Developer Command Prompt for VS2012"
 	curl ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-%LIBPNG_VERSION%.tar.gz -O
 	curl http://www.zlib.net/zlib-%ZLIB_VERSION%.tar.gz -O
 	curl http://download.osgeo.org/libtiff/tiff-%TIFF_VERSION%.tar.gz -O
+	curl https://webp.googlecode.com/files/libwebp-%WEBP_VERSION%.tar.gz
 	curl http://www.cairographics.org/releases/pixman-%PIXMAN_VERSION%.tar.gz -O
 	curl http://www.cairographics.org/releases/cairo-%CAIRO_VERSION%.tar.xz -O
 	curl http://download.icu-project.org/files/icu4c/4.8.1.1/icu4c-4_8_1_1-src.tgz -O
@@ -203,6 +205,13 @@ Upgrade to VS2012 64-bit project
 	nmake /f Makefile.vc
 	cd %ROOTDIR%
 	copy libtiff\libtiff.lib .
+
+### WEBP
+
+    bsdtar xvzf  %PKGDIR%\libwebp-%WEBP_VERSION%.tar.gz
+    cd  webp
+    nmake /f Makefile.vc CFG=release-static RTLIBCFG=static OBJDIR=output ARCH=x64
+    cd %ROOTDIR%
 
 ### Pixman
 

@@ -55,6 +55,7 @@ lib mapnik
     shield_symbolizer.cpp
     text_symbolizer.cpp
     tiff_reader.cpp
+    webp_reader.cpp
     wkb.cpp
     projection.cpp
     proj_transform.cpp
@@ -150,6 +151,7 @@ lib mapnik
     ..//png
     ..//jpeg
     ..//tiff
+    ..//webp
     ..//freetype2
     ..//proj
     ..//icu
