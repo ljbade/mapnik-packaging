@@ -101,7 +101,8 @@ lib mapnik
     xml_tree.cpp
     config_error.cpp
     color_factory.cpp
-
+    # utt8/utf16 conversions
+    utils.cpp
     # others
     feature_style_processor.cpp
     mapped_memory_cache.cpp
