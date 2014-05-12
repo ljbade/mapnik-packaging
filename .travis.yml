@@ -1,17 +1,17 @@
-language: cpp
+language: objective
 
 compiler:
  - gcc
 
 env:
   matrix:
-    - CXX11=true TARGET=build_osmium
-    - CXX11=true TARGET=build_osrm QUIET=true
-    - CXX11=false TARGET=build_osrm QUIET=true
-    - CXX11=true TARGET=build_mapnik PUBLISH=true QUIET=true
-    - CXX11=false TARGET=build_mapnik PUBLISH=true QUIET=true
-    - CXX11=false TARGET=build_osm2pgsql QUIET=true
-    - CXX11=false TARGET=build_liblas QUIET=true
+    #- CXX11=true TARGET=build_osmium
+    #- CXX11=true TARGET=build_osrm QUIET=true
+    #- CXX11=false TARGET=build_osrm QUIET=true
+    #- CXX11=true TARGET=build_mapnik PUBLISH=true QUIET=true
+    #- CXX11=false TARGET=build_mapnik PUBLISH=true QUIET=true
+    #- CXX11=false TARGET=build_osm2pgsql QUIET=true
+    #- CXX11=false TARGET=build_liblas QUIET=true
     - CXX11=false TARGET=build_http QUIET=true
   global:
     - secure: jLa/ai9FzqYRZkZrjQhn5KbsSrDDLBV2hPlKQh/nMn5bb5RooMnAo/9aSYsq8o4lMtnqsYX7wv/r35GKpJJk1OFBWmj1L94KTfm1TdC5Xlr5iumRbQ9VEPBbMgQw6WU+bp88QxvT0I9DZxgciMk6GV9eBM3dH4BSIwRCamOl018=
@@ -28,4 +28,5 @@ before_script:
 
 script:
  - source ./build.sh
+ - export PLATFORM=${TRAVIS_BRANCH}
  - ${TARGET}
