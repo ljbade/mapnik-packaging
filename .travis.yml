@@ -27,6 +27,6 @@ before_script:
  - true
 
 script:
- - source ./build.sh
  - export PLATFORM=${TRAVIS_BRANCH}
+ - source ./build.sh
  - ${TARGET}
