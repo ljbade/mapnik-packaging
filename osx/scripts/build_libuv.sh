@@ -12,7 +12,7 @@ cd ${PACKAGES}
 #    echoerr "using cached node at libuv-v${LIBUV_VERSION}.tar.gz"
 #fi
 
-git checkout https://github.com/joyent/libuv.git
+git clone https://github.com/joyent/libuv.git
 
 echoerr 'building libuv'
 #rm -rf libuv-${LIBUV_VERSION}
