@@ -226,7 +226,7 @@ elif [[ ${PLATFORM} == 'Android' ]]; then
     fi
     export ICU_EXTRA_CPP_FLAGS="${ICU_EXTRA_CPP_FLAGS} -DU_HAVE_NL_LANGINFO_CODESET=0"
     alias ldd="arm-linux-androideabi-readelf -d "
-    export EXTRA_CFLAGS="-fpic -ffunction-sections -funwind-tables -fstack-protector -no-canonical-prefixes -fomit-frame-pointer -fno-strict-aliasing -Wa,--noexecstack -march=armv7-a -mhard-float -mfpu=vfpv3 -mthumb -D_LITTLE_ENDIAN -D_NDK_MATH_NO_SOFTFP=1"
+    export EXTRA_CFLAGS="-fpic -ffunction-sections -funwind-tables -fstack-protector -no-canonical-prefixes -fomit-frame-pointer -fno-strict-aliasing -Wa,--noexecstack -march=armv7-a -mhard-float -mthumb -D_LITTLE_ENDIAN -D_NDK_MATH_NO_SOFTFP=1"
     export EXTRA_CXXFLAGS="${EXTRA_CFLAGS}"
     export EXTRA_LDFLAGS="-Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--no-warn-mismatch -lm_hard"
     export BOOST_TOOLSET="gcc-arm"
